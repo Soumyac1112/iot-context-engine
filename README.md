@@ -25,6 +25,21 @@ python -m pytest              # run the tests (offline, no API calls)
 To open the dashboard straight into a story, use a demo link:
 `http://localhost:8501/?story=hr_spike_still&autorun=1&speed=10x`
 
+## Put it online (Streamlit Community Cloud, free)
+
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub.
+2. **Create app** → *Deploy a public app from GitHub*: repository `Soumyac1112/iot-context-engine`,
+   branch `main`, main file `dashboard.py`.
+3. **Advanced settings**: Python 3.13, and paste this into **Secrets** (TOML):
+   ```toml
+   LLM_PROVIDER = "groq"
+   GROQ_API_KEY = "gsk_..."
+   ```
+4. **Deploy**. Every `git push` to `main` redeploys the app on its own.
+
+The dashboard copies these secrets into the environment, so no `.env` file is needed online.
+Without a key the app still works, running on rules only.
+
 ## The 8 building blocks, and where each one lives
 
 | # | Block | File | What it does |

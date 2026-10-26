@@ -10,10 +10,19 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from context_engine import SCENARIOS, ContextEngine, make_llm
-from context_engine.evaluate import ScenarioResult
-from context_engine.safety import HIGH_HR_MARGIN
-from context_engine.simulator import generate
+# On Streamlit Cloud the keys come from the app's Secrets box, not a .env file.
+# Copy them into the environment before the engine reads its settings.
+try:
+    for _key, _value in st.secrets.items():
+        if isinstance(_value, str):
+            os.environ.setdefault(_key, _value)
+except Exception:  # no secrets.toml (running locally): the .env file is used instead
+    pass
+
+from context_engine import SCENARIOS, ContextEngine, make_llm  # noqa: E402
+from context_engine.evaluate import ScenarioResult  # noqa: E402
+from context_engine.safety import HIGH_HR_MARGIN  # noqa: E402
+from context_engine.simulator import generate  # noqa: E402
 
 st.set_page_config(page_title="Wearable Context Engine", page_icon="⌚", layout="wide")
 

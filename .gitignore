@@ -12,3 +12,6 @@ __pycache__/
 # office lock files
 ~$*
 *.tmp
+
+# streamlit secrets (keys for local runs)
+.streamlit/secrets.toml
